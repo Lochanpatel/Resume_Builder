@@ -34,8 +34,3 @@ python -m flask run
 - Add unit and integration tests.
 - Add GitHub Actions workflow for CI.
 
-## Contributing
-Please open issues or pull requests with a short description of the change.
-
-## License
-Specify a license for the project (e.g., MIT).
