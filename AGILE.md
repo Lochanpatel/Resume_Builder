@@ -14,7 +14,7 @@ Definition of Done (DoD)
 - Unit / integration tests added and passing
 - Linting and CI checks pass
 - Basic documentation / usage note updated
-- Deployed to staging (if applicable)
+- Deployed to staging 
 
 Quality & Metrics
 
