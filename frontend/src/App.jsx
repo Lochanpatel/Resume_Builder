@@ -124,6 +124,10 @@ export default function App() {
     setResume(initialResume)
   }
 
+  const printResume = () => {
+    window.print()
+  }
+
   return (
     <div className="app-shell">
       <div className="editor-panel">
@@ -257,6 +261,9 @@ export default function App() {
         </section>
 
         <div className="actions">
+          <button type="button" className="secondary" onClick={printResume}>
+            Print resume
+          </button>
           <button type="button" className="secondary" onClick={resetResume}>
             Reset example
           </button>

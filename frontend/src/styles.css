@@ -202,6 +202,119 @@ button.secondary {
 .resume-header {
   display: flex;
   justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.name {
+  margin: 0;
+  font-size: 38px;
+  letter-spacing: -0.03em;
+}
+
+.title {
+  margin: 8px 0 0;
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.contact {
+  display: grid;
+  gap: 6px;
+  text-align: right;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.section h2 {
+  margin: 0 0 14px;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+}
+
+.job,
+.education-entry {
+  margin-bottom: 16px;
+}
+
+.job h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills span {
+  display: inline-flex;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #eef6ff;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.resume-footer {
+  margin-top: 26px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media print {
+  body,
+  html {
+    background: #fff;
+  }
+
+  .app-shell {
+    display: block;
+    padding: 0;
+  }
+
+  .editor-panel,
+  .actions,
+  .panel-header,
+  .card,
+  .section-heading,
+  .subcard,
+  .subcard-actions,
+  button {
+    display: none !important;
+  }
+
+  .preview-panel {
+    justify-content: stretch;
+  }
+
+  .resume-root {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 24px;
+    width: auto;
+  }
+
+  .resume-header,
+  .section {
+    page-break-inside: avoid;
+  }
+}
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
   align-items: flex-start;
   border-bottom: 1px solid #e5e7eb;
   padding-bottom: 12px;
