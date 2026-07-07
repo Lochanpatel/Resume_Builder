@@ -124,6 +124,24 @@ export default function App() {
     setResume(initialResume)
   }
 
+  const downloadPdf = async () => {
+    const element = document.querySelector('.resume-root')
+    if (!element) return
+
+    const html2pdf = (await import('html2pdf.js')).default
+
+    html2pdf()
+      .set({
+        margin: 10,
+        filename: `${resume.name || 'resume'}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, backgroundColor: '#ffffff' },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      })
+      .from(element)
+      .save()
+  }
+
   const printResume = () => {
     window.print()
   }
@@ -261,6 +279,9 @@ export default function App() {
         </section>
 
         <div className="actions">
+          <button type="button" className="secondary" onClick={downloadPdf}>
+            Download PDF
+          </button>
           <button type="button" className="secondary" onClick={printResume}>
             Print resume
           </button>
