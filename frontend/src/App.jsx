@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import { validateEmail, validatePhone, validateURL } from './utils'
 
 const emptyExperience = () => ({
   role: '',
@@ -48,9 +49,31 @@ const initialResume = {
   skillsText: 'React, JavaScript, HTML, CSS, Accessibility'
 }
 
+// Validation helpers
+const validateEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegex.test(email)
+}
+
+const validatePhone = (phone) => {
+  const phoneRegex = /^[\d\-\s\+\(\)]+$|^$/
+  return phoneRegex.test(phone)
+}
+
+const validateURL = (url) => {
+  if (!url) return true
+  try {
+    new URL(`https://${url}`)
+    return true
+  } catch {
+    return false
+  }
+}
+
 export default function App() {
   const [resume, setResume] = useState(initialResume)
   const [hasLoaded, setHasLoaded] = useState(false)
+  const [errors, setErrors] = useState({})
 
   useEffect(() => {
     try {
@@ -79,6 +102,34 @@ export default function App() {
   )
 
   const handleFieldChange = (field, value) => {
+    let newErrors = { ...errors }
+    
+    // Validate specific fields
+    if (field === 'email' && value && !validateEmail(value)) {
+      newErrors.email = 'Please enter a valid email address'
+    } else if (field === 'email') {
+      delete newErrors.email
+    }
+    
+    if (field === 'phone' && !validatePhone(value)) {
+      newErrors.phone = 'Please enter a valid phone number'
+    } else if (field === 'phone') {
+      delete newErrors.phone
+    }
+    
+    if (field === 'website' && !validateURL(value)) {
+      newErrors.website = 'Please enter a valid website URL'
+    } else if (field === 'website') {
+      delete newErrors.website
+    }
+    
+    if (field === 'name' && !value.trim()) {
+      newErrors.name = 'Full name is required'
+    } else if (field === 'name') {
+      delete newErrors.name
+    }
+    
+    setErrors(newErrors)
     setResume((current) => ({ ...current, [field]: value }))
   }
 
@@ -160,25 +211,29 @@ export default function App() {
         <section className="card">
           <h2>Profile</h2>
           <div className="field-grid">
-            <label>
+            <label className={errors.name ? 'has-error' : ''}>
               Full name
               <input value={resume.name} onChange={(event) => handleFieldChange('name', event.target.value)} />
+              {errors.name && <span className="error-message">{errors.name}</span>}
             </label>
             <label>
               Professional title
               <input value={resume.title} onChange={(event) => handleFieldChange('title', event.target.value)} />
             </label>
-            <label>
+            <label className={errors.email ? 'has-error' : ''}>
               Email
               <input value={resume.email} onChange={(event) => handleFieldChange('email', event.target.value)} />
+              {errors.email && <span className="error-message">{errors.email}</span>}
             </label>
-            <label>
+            <label className={errors.phone ? 'has-error' : ''}>
               Phone
               <input value={resume.phone} onChange={(event) => handleFieldChange('phone', event.target.value)} />
+              {errors.phone && <span className="error-message">{errors.phone}</span>}
             </label>
-            <label>
+            <label className={errors.website ? 'has-error' : ''}>
               Website
               <input value={resume.website} onChange={(event) => handleFieldChange('website', event.target.value)} />
+              {errors.website && <span className="error-message">{errors.website}</span>}
             </label>
           </div>
         </section>

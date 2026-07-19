@@ -273,6 +273,18 @@ button.secondary {
   color: var(--muted);
 }
 
+.error-message {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+label.has-error input,
+label.has-error textarea {
+  border-color: #dc2626;
+  outline-color: #fee2e2;
+}
+
 @media print {
   body,
   html {
